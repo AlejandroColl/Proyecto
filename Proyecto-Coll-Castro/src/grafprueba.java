@@ -55,6 +55,8 @@ public class grafprueba extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jCBSelr = new javax.swing.JComboBox<>();
         jButton3 = new javax.swing.JButton();
+        jCBSelr1 = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
         JPAgregar = new javax.swing.JPanel();
         jTextarchivo = new javax.swing.JTextField();
         JBSeleccionar = new javax.swing.JButton();
@@ -110,6 +112,13 @@ public class grafprueba extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Seleccionar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout JPBuscarLayout = new javax.swing.GroupLayout(JPBuscar);
         JPBuscar.setLayout(JPBuscarLayout);
         JPBuscarLayout.setHorizontalGroup(
@@ -137,13 +146,20 @@ public class grafprueba extends javax.swing.JFrame {
                                         .addComponent(JLTitout1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(132, 132, 132)))
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPBuscarLayout.createSequentialGroup()
-                        .addComponent(jCBSelr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                    .addGroup(JPBuscarLayout.createSequentialGroup()
+                        .addGroup(JPBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCBSelr1, 0, 547, Short.MAX_VALUE)
+                            .addComponent(jCBSelr, 0, 547, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addGroup(JPBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(77, 77, 77))))
+                            .addGroup(JPBuscarLayout.createSequentialGroup()
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(9, Short.MAX_VALUE))
+                            .addGroup(JPBuscarLayout.createSequentialGroup()
+                                .addGroup(JPBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 12, Short.MAX_VALUE))))))
         );
         JPBuscarLayout.setVerticalGroup(
             JPBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,13 +178,17 @@ public class grafprueba extends javax.swing.JFrame {
                     .addComponent(JLPclaves1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(36, 36, 36)
                 .addGroup(JPBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jCBSelr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(JPBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jCBSelr1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addComponent(jButton3)
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(203, Short.MAX_VALUE))
         );
 
         JPAgregar.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -289,6 +309,7 @@ public class grafprueba extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu6MouseClicked
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
+        JPBuscar.setVisible(false);
         JPAgregar.setVisible(true);
     }//GEN-LAST:event_jMenu5MouseClicked
 
@@ -324,19 +345,24 @@ public class grafprueba extends javax.swing.JFrame {
                 while(((linea=br.readLine())) !=null){
                     System.out.print("ENTRA EN WHILE\n");
                     String[] linea_split = linea.split("\\|");
-                    titulo=linea_split[0];
-                    palabras=linea_split[1];
-                    autores=linea_split[2];
+                    titulo=linea_split[0].trim();
+                    autores=linea_split[1];
+                    palabras=linea_split[2];
                     texto=linea_split[3];
-                    tableh.put(titulo, titulo+"|"+palabras+"|"+autores+"|"+texto);
+                    tableh.put(titulo, titulo+"|"+autores+"|"+palabras+"|"+texto);
                     /*System.out.print("TITULO EN WHILE "+titulo+"\n");
                     String[] btitulo = tableh.get(titulo).split("\\|");
+                    if (btitulo[0]== null) { System.out.println("NO ENCONTRO EL TITULO");
                     System.out.print("LUEGO DEL SPLIT\n");
+                    }
                     System.out.println("COMPARANDO TITULOS");
-                    System.out.println(btitulo[0]);
-                    System.out.println(titulo);
-                    tituloh=btitulo[0];
-                    System.out.println(tituloh);
+                    //System.out.println(btitulo[0]);
+                    System.out.println(titulo+" Largo titulo -> "+titulo.length());
+                    tituloh=btitulo[0].trim();
+                    System.out.println(tituloh+" Largo->"+tituloh.length());
+                    System.out.println("FIN COMPARANDO TITULOS");
+                                    
+                
                     if (!titulo.equals(tituloh)){
                         tableh.put(titulo, titulo+"|"+palabras+"|"+autores+"|"+texto);
                         lineac ++;
@@ -346,7 +372,8 @@ public class grafprueba extends javax.swing.JFrame {
                     */
                     
                 }
-
+                if (lineac > 0){JOptionPane.showMessageDialog(null, "Se Agregaron Resumenes");}
+                
                 System.out.println("MUESTRA HASHTABLE");
                 for (String key : tableh.keySet()){
                     System.out.println(key.hashCode() % 21 + "\t"  + key + "\t" + tableh.get(key));
@@ -368,7 +395,7 @@ public class grafprueba extends javax.swing.JFrame {
                 }catch(Exception e){
                 } // fin bloque
                 
-                JOptionPane.showMessageDialog(null, "Se Agregaron Resumenes");
+                
                 JPAgregar.setVisible(false);
                 jTextarchivo.setText("");
         } else if (result == JFileChooser.CANCEL_OPTION) {
@@ -435,12 +462,26 @@ public class grafprueba extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        JPAgregar.setVisible(false);
         JPBuscar.setVisible(true);
         jCBSelr.removeAllItems();
+        jCBSelr1.removeAllItems();
+        // Recorro hashtable para extraer los tiulos de lista CB
         for (String key : tableh.keySet()){
             String[] value_split = tableh.get(key).split("\\|");
             jCBSelr.addItem(value_split[0]);
+            
+            System.out.println("autores ->"+value_split[1]);
+            String[] autores = value_split[1].split(",");
+            for(String autor : autores){
+                System.out.println(autor+" "+value_split[0]);
+                tablea.put(autor, value_split[0]);
+            }
             //System.out.println(key.hashCode() % 21 + "\t"  + key + "\t" + tableh.get(key));
+        }
+        System.out.println("HASH MAP DE AUTORES");
+        for (String key : tablea.keySet()){
+            System.out.println(key+" "+tablea.get(key));
         }
     }//GEN-LAST:event_jMenu4MouseClicked
 
@@ -455,6 +496,10 @@ public class grafprueba extends javax.swing.JFrame {
     private void JBSeleccionar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBSeleccionar1ActionPerformed
         JPAgregar.setVisible(false);
     }//GEN-LAST:event_JBSeleccionar1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -504,10 +549,10 @@ public class grafprueba extends javax.swing.JFrame {
                 System.out.println(linea);
                 String[] value_split = linea.split("\\|");
                 titulo=value_split[0];
-                palabras=value_split[1];
-                autores=value_split[2];
+                autores=value_split[1];
+                palabras=value_split[2];
                 texto=value_split[3];
-                tableh.put(titulo, titulo+"|"+palabras+"|"+autores+"|"+texto);
+                tableh.put(titulo, titulo+"|"+autores+"|"+palabras+"|"+texto);
                 lineac ++;
             }
             System.out.println("PRECARGADOS");
@@ -521,7 +566,8 @@ public class grafprueba extends javax.swing.JFrame {
 
     
     
-    private static Hashtable<String, String> tableh = new Hashtable<>(21);
+    private static Hashtable<String, String> tableh = new Hashtable<>(100);
+    private static HashMap<String, String> tablea = new HashMap<>(100);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBSeleccionar;
     private javax.swing.JButton JBSeleccionar1;
@@ -532,7 +578,9 @@ public class grafprueba extends javax.swing.JFrame {
     private javax.swing.JPanel JPBuscar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jCBSelr;
+    private javax.swing.JComboBox<String> jCBSelr1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
